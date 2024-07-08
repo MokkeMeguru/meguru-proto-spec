@@ -1,0 +1,19 @@
+name: Dispatch Update for Swift
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Dispatch event to swift repo
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          repository: MokkeMeguru/meguru-chat-grpc-swift
+          event-type: update-proto
+          client-payload: '{"branch": "main"}'
