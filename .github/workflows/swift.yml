@@ -10,10 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Dispatch event to swift repo
-        uses: peter-evans/repository-dispatch@v1
+      - uses: cybozu/octoken-action@v1
+        id: app-token
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          github_app_id: ${{ secrets.APP_ID }}
+          github_app_private_key: ${{ secrets.PRIVATE_KEY }}
+      - name: Dispatch event to swift repo
+        uses: otakakot/repository-dispatch@v1.0.0
+        with:
+          token: ${{ steps.app-token.outputs.token }}
           repository: MokkeMeguru/meguru-chat-grpc-swift
           event-type: update-proto
-          client-payload: '{"branch": "main"}'
+          client-payload: '{}'
