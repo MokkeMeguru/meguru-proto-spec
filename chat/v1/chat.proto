@@ -5,7 +5,7 @@ package chat.v1;
 import "google/protobuf/timestamp.proto";
 
 service ChatService {
-  // 検証用の一時的なユーザーを作成 RPC
+  // 検証用の一時的なユーザーを作成する RPC
   rpc TempCreateUser(TempCreateUserRequest) returns (TempCreateUserResponse) {} 
   rpc Send(SendRequest) returns (SendResponse) {}
   rpc Receive(ReceiveRequest) returns (stream ReceiveResponse) {}
@@ -43,6 +43,7 @@ message User {
   string user_id = 1;
   string name = 2;
   string avatar_url = 3;
+  int32 age = 4;
 }
 
 // Message message
